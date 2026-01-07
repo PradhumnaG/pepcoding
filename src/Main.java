@@ -1,7 +1,4 @@
-import recurssion.DisplayArrReverse;
-import recurssion.Displayarr;
-import recurssion.MaxArray;
-import recurssion.PrintZigZag;
+import recurssion.*;
 
 import java.util.Scanner;
 
@@ -12,6 +9,7 @@ public class Main {
         Scanner  scn = new Scanner(System.in);
         System.out.println("give the value of n");
         int n = scn.nextInt();
+        int x = scn.nextInt();
          int [] arr = new int[n];
          for (int i = 0; i < n; i++){
              arr[i] = scn.nextInt();
@@ -21,8 +19,8 @@ public class Main {
        // PrintZigZag.pzz(n);
            //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
-
-        int  max = MaxArray.maxArray(arr,0);
+int max = LastLocation.lastLocation(arr,x,0);
+//int  max = MaxArray.maxArray(arr,0);
         System.out.println("Maximum element in the array: " + max);
         }
     }
