@@ -8,7 +8,8 @@ public class Getkpc {
     public static void  main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         String str = sc.next();
-        ArrayList<String> words=  getKPC(str);
+        ArrayList<String> words= new ArrayList<>();
+        words  =  getKPC(str);
         System.out.println(words);
     }
     static String[] codes = {".;","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
@@ -20,7 +21,8 @@ public class Getkpc {
         }
         char ch = str.charAt(0);
         String ros = str.substring(1);
-        ArrayList<String> rres = getKPC(ros);
+        ArrayList<String> rres = new ArrayList<>();
+        rres=getKPC(ros);
         ArrayList<String> myres = new ArrayList<>();
         String codeforch = codes[ch - '0'];
         for (int i = 0; i < codeforch.length(); i++) {
