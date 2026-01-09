@@ -11,25 +11,25 @@ public class Knightour {
         int[][] chess = new int[n][n];
         printKnightTour(chess, r, c, 1);
     }
-    public  static void printKnightTour(int[][] chess, int r, int c, int sum){
+    public  static void printKnightTour(int[][] chess, int r, int c, int move){
         if(r<0 || c<0 || r>=chess.length || c>=chess.length || chess[r][c]>0){
             return;
-        } else if(sum ==chess.length* chess.length){
-            chess[r][c] = sum;
+        } else if(move ==chess.length* chess.length){
+            chess[r][c] = move;
             displayBoard(chess);
             chess[r][c] = 0;
             return;
         }
-        chess[r][c] = sum;
-        printKnightTour(chess,r-2,c+1,sum+1);
-        printKnightTour(chess,r-1,c+2,sum+1);
-        printKnightTour(chess,r+1,c+2,sum+1);
-        printKnightTour(chess,r+2,c+1,sum+1);
-        printKnightTour(chess,r+2,c-1,sum+1);
-        printKnightTour(chess,r+1,c-2,sum+1);
-        printKnightTour(chess,r-1,c-2,sum+1);
-        printKnightTour(chess,r-2,c-1,sum+1);
-
+        chess[r][c] = move;
+        printKnightTour(chess,r-2,c+1,move+1);
+        printKnightTour(chess,r-1,c+2,move+1);
+        printKnightTour(chess,r+1,c+2,move+1);
+        printKnightTour(chess,r+2,c+1,move+1);
+        printKnightTour(chess,r+2,c-1,move+1);
+        printKnightTour(chess,r+1,c-2,move+1);
+        printKnightTour(chess,r-1,c-2,move+1);
+        printKnightTour(chess,r-2,c-1,move+1);
+       chess[r][c] = 0;
 
     }
     public  static void displayBoard(int[][] board){
