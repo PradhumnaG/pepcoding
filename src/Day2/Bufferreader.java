@@ -3,7 +3,7 @@ package Day2;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class BufferReader {
+public class Bufferreader {
 
     public  static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
