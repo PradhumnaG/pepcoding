@@ -13,7 +13,6 @@ public class BInary1 {
             this.left = left;
             this.right= right;
         }
-
     }
     public static class Pair{
         Node node;
