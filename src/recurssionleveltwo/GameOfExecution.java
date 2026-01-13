@@ -22,3 +22,4 @@ public class GameOfExecution {
         System.out.println(solution(n,k));
     }
 }
+//The topics heavily favor HashMaps, Arrays/Strings, Sliding Window, and BFS/DFS.
