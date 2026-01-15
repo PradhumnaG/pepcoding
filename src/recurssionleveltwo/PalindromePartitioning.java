@@ -37,7 +37,7 @@ public class PalindromePartitioning {
         HashMap<Character,Integer> fmap = new HashMap<>();
         for(int i = 0;i <str.length();i++){
             char ch = str.charAt(i);
-            if(fmap.containsKey(ch)){
+            if(fmap.containsKey(ch)){//like a2 b2 like thisthey work
                 int of = fmap.get(ch);
                 fmap.put(ch,of +1);
             }else{
