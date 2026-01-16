@@ -28,12 +28,14 @@ public class EqualSumSubSet {
                 if (ans.get(i).size() > 0) {
                     ans.get(i).add(arr[vidx]);
                     subsetSum[i] += arr[vidx];
-                    solution(arr, vidx, n, k, subsetSum, asf, ans);
+                    solution(arr, vidx +1, n, k, subsetSum, asf, ans);
+                    subsetSum[i] -= arr[vidx];
                     ans.get(i).remove(ans.get(i).size() - 1);
                 } else {
                     ans.get(i).add(arr[vidx]);
                     subsetSum[i] += arr[vidx];
-                    solution(arr, vidx, n, k, subsetSum, asf + 1, ans);
+                    solution(arr, vidx +1, n, k, subsetSum, asf + 1, ans);
+                    subsetSum[i] -= arr[vidx];
                     ans.get(i).remove(ans.get(i).size() - 1);
                     break;
                 }
