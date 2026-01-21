@@ -1,66 +1,73 @@
 package recurssion;
 
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class RemoveInvalidParentheses {
 
     /**
-     * The main recursive function to find all valid strings by removing the minimum number of parentheses.
-     * @param str The current string being processed.
-     * @param minRemoval The remaining number of parentheses to remove.
-     * @param ans A HashMap to store unique valid results to avoid duplicates.
+     * Recursively finds and prints all valid strings by removing the minimum number of parentheses.
+     *
+     * @param str        The current string in the recursion.
+     * @param minRemoval The number of removals still allowed.
+     * @param ans        A set to store unique valid answers to avoid duplicates.
      */
-    public static void solution(String str, int minRemoval, HashMap<String, Boolean> ans) {
-        // Base Case: If we have performed the minimum required removals.
+    public static void solution(String str, int minRemoval, HashSet<String> ans) {
+        // Base case: If we have used up our allowed removals.
         if (minRemoval == 0) {
-            // Check if the resulting string is now valid.
+            // Check if the resulting string is valid.
             if (getMin(str) == 0) {
-                // If it's valid and we haven't printed it before, print it and add it to our set of answers.
-                if (!ans.containsKey(str)) {
+                // If it's valid and not already printed, print it and add to the set.
+                if (!ans.contains(str)) {
                     System.out.println(str);
-                    ans.put(str, true);
+                    ans.add(str);
                 }
             }
             return;
         }
 
-        // Recursive Step: Iterate through the string and try removing each character.
+        // Recursive step: Iterate through the string and try removing each character.
         for (int i = 0; i < str.length(); i++) {
-            // Optimization: Only try removing parentheses.
+            // To avoid generating duplicate results from removing identical adjacent characters,
+            // we skip if the current character is the same as the previous one.
+            if (i > 0 && str.charAt(i) == str.charAt(i - 1)) {
+                continue;
+            }
+            
+            // Only consider removing parentheses.
             char ch = str.charAt(i);
             if (ch == '(' || ch == ')') {
                 String left = str.substring(0, i);
                 String right = str.substring(i + 1);
                 String newStr = left + right;
-                // Recurse with the new, smaller string and one less removal allowed.
+                // Recurse with the new string and one less removal.
                 solution(newStr, minRemoval - 1, ans);
             }
         }
     }
 
     /**
-     * Calculates the minimum number of parentheses to remove to make a string valid.
+     * Calculates the minimum number of parentheses that need to be removed to make the string valid.
+     *
      * @param str The input string.
-     * @return The count of invalid parentheses.
+     * @return The number of parentheses to remove.
      */
     public static int getMin(String str) {
         Stack<Character> st = new Stack<>();
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
-            if(ch == '('){
-        } else if (ch == ')') {
-                if(st.size() == 0){
-                    st.push(ch);
-                } else if (st.peek() == ')') {
-                    st.push(ch);
-                } else if (st.peek() == '(') {
-                   st.pop(ch);
+            if (ch == '(') {
+                st.push(ch);
+            } else if (ch == ')') {
+                if (!st.isEmpty() && st.peek() == '(') {
+                    st.pop(); // Found a matching pair.
+                } else {
+                    st.push(ch); // This ')' is unmatched.
                 }
             }
         }
-        // The final size of the stack represents the number of parentheses to be removed.
+        // The size of the stack at the end is the number of invalid parentheses.
         return st.size();
     }
 
@@ -68,12 +75,12 @@ public class RemoveInvalidParentheses {
         Scanner scn = new Scanner(System.in);
         String str = scn.next();
         
-        // Calculate the minimum number of removals needed.
-        int minRemovals = getMin(str);
+        // 1. Calculate the minimum number of removals required.
+        int mr = getMin(str);
         
-        // Find and print all valid strings.
-        solution(str, minRemovals, new HashMap<>());
-        
+        // 2. Find and print all valid solutions.
+        solution(str, mr, new HashSet<>());
+
         scn.close();
     }
 }
