@@ -16,12 +16,11 @@ public class RemoveInvalidParentheses {
     public static void solution(String str, int minRemoval, HashSet<String> ans) {
         // Base case: If we have used up our allowed removals.
         if (minRemoval == 0) {
-            // Check if the resulting string is valid.
-            if (getMin(str) == 0) {
+            // Check if the resulting string is valid using our dedicated method.
+            if (isValid(str)) {
                 // If it's valid and not already printed, print it and add to the set.
-                if (!ans.contains(str)) {
+                if (ans.add(str)) {
                     System.out.println(str);
-                    ans.add(str);
                 }
             }
             return;
@@ -29,22 +28,43 @@ public class RemoveInvalidParentheses {
 
         // Recursive step: Iterate through the string and try removing each character.
         for (int i = 0; i < str.length(); i++) {
-            // To avoid generating duplicate results from removing identical adjacent characters,
-            // we skip if the current character is the same as the previous one.
+            // Skip duplicates to avoid redundant recursive calls.
             if (i > 0 && str.charAt(i) == str.charAt(i - 1)) {
                 continue;
             }
-            
+
             // Only consider removing parentheses.
             char ch = str.charAt(i);
             if (ch == '(' || ch == ')') {
                 String left = str.substring(0, i);
                 String right = str.substring(i + 1);
-                String newStr = left + right;
                 // Recurse with the new string and one less removal.
-                solution(newStr, minRemoval - 1, ans);
+                solution(left + right, minRemoval - 1, ans);
             }
         }
+    }
+
+    /**
+     * Checks if a string has a valid/balanced set of parentheses.
+     *
+     * @param str The string to validate.
+     * @return true if the string is valid, false otherwise.
+     */
+    public static boolean isValid(String str) {
+        int count = 0;
+        for (char ch : str.toCharArray()) {
+            if (ch == '(') {
+                count++;
+            } else if (ch == ')') {
+                count--;
+            }
+            // If count is negative, it means a ')' appeared without a preceding '('.
+            if (count < 0) {
+                return false;
+            }
+        }
+        // A valid string will have a final count of 0.
+        return count == 0;
     }
 
     /**
@@ -55,8 +75,7 @@ public class RemoveInvalidParentheses {
      */
     public static int getMin(String str) {
         Stack<Character> st = new Stack<>();
-        for (int i = 0; i < str.length(); i++) {
-            char ch = str.charAt(i);
+        for (char ch : str.toCharArray()) {
             if (ch == '(') {
                 st.push(ch);
             } else if (ch == ')') {
@@ -74,10 +93,10 @@ public class RemoveInvalidParentheses {
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         String str = scn.next();
-        
+
         // 1. Calculate the minimum number of removals required.
         int mr = getMin(str);
-        
+
         // 2. Find and print all valid solutions.
         solution(str, mr, new HashSet<>());
 
