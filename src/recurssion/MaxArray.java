@@ -10,6 +10,7 @@ public class MaxArray {
             return misa;
         }
         else{
+
             return arr[idx];
         }
     }
