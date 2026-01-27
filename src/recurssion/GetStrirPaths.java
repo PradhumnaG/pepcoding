@@ -36,4 +36,5 @@ public class GetStrirPaths {
         }
         return myres;
     }
+
 }
