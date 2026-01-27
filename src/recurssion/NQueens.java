@@ -16,6 +16,7 @@ public class NQueens {
         if (row == board.length) {
             System.out.println(s + ".");
             return;
+
         }
         for (int col = 0; col < board.length; col++) {
             if (isSafe(board, row, col) == true) {
