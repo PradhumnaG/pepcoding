@@ -13,7 +13,7 @@ public class GcdLcd {
             int rem = n1 % n2;
             n1 = n2;
             n2 = rem;
-        }
+        }//
         int gcd = n2;
         int lcd =  ( op1 * op2) /gcd;
         System.out.println(" GCD"+" "+gcd);
