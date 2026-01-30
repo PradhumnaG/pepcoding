@@ -57,7 +57,7 @@ if(idx == unique.length()){
 
         char ch = unique.charAt(idx);
 for (int num = 0;num<=9;num++){
-    if(usednumber[num] == false){
+    if(usednumber[num] == false){//
         charMap.put(ch,num);
         usednumber[num] = true;
         solution(unique,idx + 1,charMap,usednumber,s1,s2,s3);
