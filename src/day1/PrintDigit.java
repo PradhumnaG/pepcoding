@@ -9,7 +9,7 @@ public class PrintDigit {
             return;
         }
 
-        if (n < 0) {    // fixed: <0 instead of <=0 (avoids infinite loop)
+        if (n < 0) {
             n = -n;
         }
 
