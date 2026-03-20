@@ -48,7 +48,7 @@ public class UniquePath {
                     }
                 }
             }
-            // Return the value in the bottom-right corner
+            // Return the value in the bottom-right corner.
             return dp[m - 1][n - 1];
         }
     }
